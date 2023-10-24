@@ -1,0 +1,180 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Saga.SiteMaster" %>
+
+<!DOCTYPE html>
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+    .clsCart {
+        float: right;
+        margin-right: 30px;
+        padding-top: 3px;
+    }
+
+    .header {
+        width: 100%;
+        padding: 8px 14px;
+        background: #d3c9c9;
+        color: pink;
+        margin-bottom: 154px;
+        position: fixed;
+        top: 0;
+    }
+
+    /* Page content */
+    .content {
+        padding: 14px;
+    }
+
+    /* The sticky class is added to the header with JS when it reaches its scroll position */
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 8px 14px;
+    }
+
+        /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+        .sticky + .content {
+            padding-top: 102px;
+        }
+
+    #NotificationDiv {
+        position: absolute;
+        left: -10px;
+        top: -4px;
+        color: black;
+    }
+
+    .clsPower {
+        float: right;
+        margin-right: 33px;
+        padding-top: 3px;
+        font-size: 20px;
+        color: black;
+    }
+</style>
+<%--<script type="text/javascript">
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function () { myHeaderfunc() };
+
+    // Get the header
+    var header = document.getElementById('SiteHeader');
+
+    // Get the offset position of the navbar
+    var sticky = header.offsetTop;
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myHeaderfunc() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>--%>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %>SAGA</title>
+
+    <%--   <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>--%>
+
+    <%--<webopt:bundlereference runat="server" path="~/Content/css" />--%>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <%--      <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />--%>
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <div class="header" clientidmode="Static" runat="server" id="SiteHeader">
+            <a id="imgLogo" href="/Projects/Home">
+                <asp:Image ID="imgageLogo" ImageUrl='~/ProductImages/sagalogo.jpg' runat="server" Width="109" Height="24" />
+            </a>
+
+            <asp:LinkButton runat="server" ID="btnLogOut"
+                ValidationGroup="edt" OnClick="btnLogOut_Click" ToolTip="Log Out" class="clsPower">
+                <asp:Image ID="Image2" runat="server" ImageUrl="~/ProductImages/powericon.png" Height="26px" Width="29px" ImageAlign="Right" />
+            </asp:LinkButton>
+
+            <a id="imgCart" class="clsCart" href="/Projects/Cart">
+                <asp:Image ID="ImageCart" ImageUrl='~/ProductImages/shopcart.png' runat="server" Width="27" Height="25" />
+
+            </a>
+            <div id="notification" runat="server" style="background-color: #fa3e3e; border-radius: 80px; color: white; padding: 1px 3px; font-size: 10px; position: absolute; top: 1px; right: 97px;">
+                <asp:Label runat="server" ID="lblCount"></asp:Label>
+            </div>
+
+
+        </div>
+        <%--  <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/About">About</a></li>
+                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>--%>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <%--    <hr />--%>
+            <footer>
+                <%--<p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>--%>
+            </footer>
+        </div>
+
+    </form>
+</body>
+
+</html>
+<script type="text/javascript">
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function () { myHeaderfunc() };
+
+    // Get the header
+    var header = document.getElementById('SiteHeader');
+
+    // Get the offset position of the navbar
+    var sticky = header.offsetTop;
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myHeaderfunc() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>
